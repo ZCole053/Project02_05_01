@@ -103,6 +103,8 @@ app.get('/', function(req,res) {
      });
 });
 
+
+
 //pulling url route
 //naming so we can use it in another module
 app.get('/auth/twitter', authenticator.redirectToTwitterLoginPage);
@@ -155,6 +157,7 @@ app.get('/search', function(req, res){
     });
 });
 
+
 //cursor collection
 app.get('/friends', function(req, res){
     var credentials = authenticator.getCredentials();
@@ -183,9 +186,9 @@ app.get('/friends', function(req, res){
 
 
 //new route for waterfall method
-app.get('/allfriends', function(req,res){
-    renderMainPageFromTwitter(req, res);
-});
+// app.get('/allfriends', function(req,res){
+//     renderMainPageFromTwitter(req, res);
+// });
 
 function renderMainPageFromTwitter(req, res) {
     var credentials = authenticator.getCredentials();
@@ -280,7 +283,7 @@ function renderMainPageFromTwitter(req, res) {
                 if(storage.connected()) {
                     storage.insertFriends(friends);
                 }
-                console.log('friends.length', friends.length);
+                //console.log('friends.length', friends.length);
             });
         }
     ]);
@@ -336,6 +339,22 @@ function ensureLoggedIn(req,res,next){
     //next would go over to the res side unless there is a middle ware chain
     next();
 }
+
+app.get('/timeline',ensureLoggedIn,function(req, res){
+    var credentials = authenticator.getCredentials();
+    var url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+    storage.getFriends(credentials.twitter_id, function(err, friends){
+        if(friends.length > 0){
+            console.log("Friends successfully loaded from MongoDB.");
+            friends.sort(function(a, b){
+                return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
+            });
+        }
+        
+        res.send(friends);
+    });
+});
+
 
 //main route into api; creating route for testing
 //manuelly mounting middle ware

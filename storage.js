@@ -147,5 +147,10 @@ module.exports = {
              _id: new ObjectId(noteId),
              owner_id:ownerId
         }, callback);
+    },
+    getScreenName: function(callback){
+        database.collection('friends'). findOne({
+           
+        }, callback)
     }
 }
