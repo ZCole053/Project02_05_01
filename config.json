@@ -7,6 +7,6 @@
     "consumer_secret": "a33OoItzQBtDVbMdcyZmVFmHzrrMKZLaWd9NZpZKpKxrBnWHef",
     "oauth_version": "1.0",
     "oauth_signature": "HMAC-SHA1",
-    "oauth_callback": "https://zmctunnel.localtunnel.me/request_token"
+    "oauth_callback": "https://zmctunnel.serveo.net/request_token"
     
 }

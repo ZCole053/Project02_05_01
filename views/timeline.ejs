@@ -1,61 +1,61 @@
-<!doctype html>
-
-<!-- 
-Author: Zedekiah Cole
-
-Summary: This file displays multiple endpoints with different 
-possible functions on the website 
-
-file name: timeline.js
-Date made: March 08 2019
-LTE: March 08 2019 
--->
-
-<html>
-
-<head>
-    <title>Friends</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <!-- gonna be located in static folder -->
-    <!-- this will be event fired so timing is not a worry -->
-    <script type="text/javascript" src="main.js"></script>
-</head>
-
-<body>
-    <div id="wrapper">
-        <a href="/logout"><button type="button" class="logout">Logout</button></a>
-        <a href="/timeline"><button type="button" class="timeline">timeline</button></a>
-        <div id="friends-column" class="column">
-            <h1>Your Friends</h1>
-            <ul id="friends">
-                <!-- dynamically creates a list of our friends -->
-                <% friends.forEach(function(friend) { %>
-                <li uid="<%= friend.twitter_id %>" class="friend">
-                    <img class="profile-image" src="<%= friend.profile_image_url %>" alt="">
-                    <p>
-                        <span class="name">
-                            <%= friend.name %>
-                        </span>
-                        <span class="screen-name">
-                            <%= friend.name %>
-                        </span>
-                    </p>
-                    <p class="location">
-                        <%= friend.location %>
-                    </p>
-                </li>
-                <% }); %>
-            </ul>
-        </div>
-        <div id="notes-column" class="column">
-            <h1>Notes</h1>
-            <ul id="timeline">
-                
-            </ul>
-        </div>
-    </div>
-</body>
-
+<!doctype html> 
+ 
+<!--  
+Author: Zedekiah Cole 
+ 
+Summary: This file displays multiple endpoints with different  
+possible functions on the website  
+ 
+file name: timeline.js 
+Date made: March 08 2019 
+LTE: March 08 2019  
+--> 
+ 
+<html> 
+ 
+<head> 
+    <title>Friends</title> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="initial-scale=1.0"> 
+    <link rel="stylesheet" href="style.css"> 
+    <!-- gonna be located in static folder --> 
+    <!-- this will be event fired so timing is not a worry --> 
+    <script type="text/javascript" src="main.js"></script> 
+</head> 
+ 
+<body> 
+    <div id="wrapper"> 
+        <a href="/logout"><button type="button" class="logout">Logout</button></a> 
+        <a href="/timeline"><button type="button" class="timeline">timeline</button></a> 
+        <div id="friends-column" class="column"> 
+            <h1>Your Friends</h1> 
+            <ul id="friends"> 
+                <!-- dynamically creates a list of our friends --> 
+                <% friends.forEach(function(friend) { %> 
+                <li uid="<%= friend.twitter_id %>" class="friend"> 
+                    <img class="profile-image" src="<%= friend.profile_image_url %>" alt=""> 
+                    <p> 
+                        <span class="name"> 
+                            <%= friend.name %> 
+                        </span> 
+                        <span class="screen-name"> 
+                            <%= friend.name %> 
+                        </span> 
+                    </p> 
+                    <p class="location"> 
+                        <%= friend.location %> 
+                    </p> 
+                </li> 
+                <% }); %> 
+            </ul> 
+        </div> 
+        <div id="notes-column" class="column"> 
+            <h1>Notes</h1> 
+            <ul id="timeline"> 
+                 
+            </ul> 
+        </div> 
+    </div> 
+</body> 
+ 
 </html>

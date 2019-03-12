@@ -197,7 +197,7 @@
         return notes;//debug
     }
 
-    //function to creat note doesn't need parameters
+    //function to create note doesn't need parameters
     function createAddNoteButton(){
         var element = document.createElement('li');
         //getting css

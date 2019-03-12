@@ -145,12 +145,19 @@ module.exports = {
         database.collection('notes').deleteOne({
              //id was placed in a object
              _id: new ObjectId(noteId),
-             owner_id:ownerId
+             owner_id: ownerId
         }, callback);
     },
-    getScreenName: function(callback){
-        database.collection('friends'). findOne({
-           
-        }, callback)
+
+
+// test functions
+
+
+    getScreenName: function(err, friends){
+        if(err){
+            return console.log(err);
+        }
+        return friends;
+
     }
 }

@@ -343,16 +343,7 @@ function ensureLoggedIn(req,res,next){
 app.get('/timeline',ensureLoggedIn,function(req, res){
     var credentials = authenticator.getCredentials();
     var url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-    storage.getFriends(credentials.twitter_id, function(err, friends){
-        if(friends.length > 0){
-            console.log("Friends successfully loaded from MongoDB.");
-            friends.sort(function(a, b){
-                return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-            });
-        }
-        
-        res.send(friends);
-    });
+    
 });
 
 
