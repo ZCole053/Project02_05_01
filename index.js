@@ -86,7 +86,7 @@ app.get('/', function(req,res) {
         }
         //success empty array or full array
         if(friends.length > 0){
-            console.log("Friends successfully loaded from MongoDB.");
+            //console.log("Friends successfully loaded from MongoDB.");
             //reordering the array
             //function tells what it needs to do and always has 2 parameters
             //needs previouse and current friend and a possible swap
@@ -97,10 +97,11 @@ app.get('/', function(req,res) {
             res.render('index', {friends: friends});
         }
         else{
-            console.log("Loading friends from Twitter.");
+            //console.log("Loading friends from Twitter.");
             renderMainPageFromTwitter(req, res);
         }
      });
+
 });
 
 
@@ -341,11 +342,29 @@ function ensureLoggedIn(req,res,next){
 }
 
 app.get('/timeline',ensureLoggedIn,function(req, res){
-    var credentials = authenticator.getCredentials();
-    var url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
-    
+        var credentials = authenticator.getCredentials();
+        if(!credentials.access_token || !credentials.access_token_secret){
+            return res.sendStatus(418);
+        }
+        var url = "https://api.twitter.com/1.1/statuses/user_timeline.json";
+        var query = queryString.stringify({ user_id: req.param.uid});
+        url += '?' + query;
+    authenticator.get(url,credentials.access_token,credentials.access_token_secret,function(err, data){
+        if(err){
+            return res.status(400).send(err);
+        }
+        res.send(data);//debug
+    });
 });
 
+app.get('/block', function(req,res){
+    var credentials = authenticator.getCredentials();
+    if(!credentials.access_token || !credentials.access_token_secret){
+        return res.sendStatus(418);
+    }
+    var url = "https://api.twitter.com/1.1/blocks/ids.json";
+    var query = queryString.stringify({ });
+});
 
 //main route into api; creating route for testing
 //manuelly mounting middle ware

@@ -148,16 +148,4 @@ module.exports = {
              owner_id: ownerId
         }, callback);
     },
-
-
-// test functions
-
-
-    getScreenName: function(err, friends){
-        if(err){
-            return console.log(err);
-        }
-        return friends;
-
-    }
 }
